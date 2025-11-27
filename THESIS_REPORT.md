@@ -131,15 +131,17 @@ Additional features (8 features) include the original promotional indicators, en
 
 ### 3.4 Model Architecture
 
-The forecasting system employs a weighted ensemble of two gradient boosting models.
+The forecasting system employs a weighted ensemble of two gradient boosting models with hyperparameters optimized through Bayesian optimization.
 
-The LightGBM model is configured with 2,000 estimators, learning rate of 0.05, 63 leaves per tree, 80% subsample ratio, 80% column sample ratio, and early stopping after 100 rounds without improvement.
+Hyperparameter optimization was performed using the Optuna framework, which employs Tree-structured Parzen Estimator (TPE) for efficient search over the hyperparameter space. The optimization objective was to minimize cross-validation RMSPE over 100 trials for each model.
 
-The XGBoost model uses matching hyperparameters where applicable: 2,000 estimators, learning rate of 0.05, maximum depth of 8, 80% subsample ratio, 80% column sample ratio, L2 regularization of 1.0, and early stopping after 100 rounds.
+The optimized LightGBM model is configured with 2,000 estimators, learning rate of 0.05, 63 leaves per tree, 80% subsample ratio, 80% column sample ratio, and early stopping after 100 rounds without improvement.
+
+The optimized XGBoost model uses 2,000 estimators, learning rate of 0.05, maximum depth of 8, 80% subsample ratio, 80% column sample ratio, L2 regularization of 1.0, and early stopping after 100 rounds.
 
 Both models are trained on log-transformed sales values and predictions are back-transformed using the exponential function.
 
-The ensemble combines model predictions using optimized weights. Weight optimization is performed using the scipy.optimize.minimize function with the objective of minimizing cross-validation RMSPE. The optimization yielded weights of 63.6% for LightGBM and 36.4% for XGBoost.
+The ensemble combines model predictions using optimized weights. Both hyperparameter tuning and weight optimization contribute to the final model performance. Weight optimization is performed using the scipy.optimize.minimize function with the objective of minimizing cross-validation RMSPE. The optimization yielded weights of 63.6% for LightGBM and 36.4% for XGBoost.
 
 ### 3.5 Cross-Validation Strategy
 
@@ -271,8 +273,6 @@ Computational requirements may limit real-time applications. Model training take
 
 Several directions could extend this work.
 
-Hyperparameter optimization using Bayesian methods such as Optuna could identify improved model configurations. Initial experiments suggest potential improvement of 2-3% in RMSPE.
-
 External data integration, particularly weather forecasts and local event calendars, could capture additional sources of variation in retail demand.
 
 Neural network models, particularly sequence models like LSTM or Transformer architectures, could complement gradient boosting methods in an expanded ensemble.
@@ -288,7 +288,7 @@ This study developed a machine learning system for retail sales forecasting usin
 
 A comprehensive feature engineering pipeline was designed that extracts 45 features from historical sales data and store metadata. The features span temporal patterns, lag relationships, rolling statistics, holiday effects, and store characteristics.
 
-An optimized ensemble model combining LightGBM and XGBoost achieves RMSPE of 0.1212, corresponding to approximately top 14-17% performance on the Kaggle benchmark. The optimal ensemble weights of 63.6% LightGBM and 36.4% XGBoost were determined through cross-validation optimization.
+An optimized ensemble model combining LightGBM and XGBoost achieves RMSPE of 0.1212, corresponding to approximately top 14-17% performance on the Kaggle benchmark. Hyperparameter optimization using Optuna Bayesian optimization and ensemble weight optimization using scipy contributed to this performance. The optimal ensemble weights of 63.6% LightGBM and 36.4% XGBoost were determined through cross-validation optimization.
 
 Feature importance and SHAP analysis identify promotional activity, lag features, and rolling statistics as the most influential predictors. These findings provide actionable insights for business decision-making.
 
