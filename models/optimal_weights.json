@@ -1,0 +1,74 @@
+{
+  "optimal_weights": {
+    "lgb_weight": 0.63625263327522,
+    "xgb_weight": 0.36374736672478003
+  },
+  "scores": {
+    "lgb_only": 0.12174864196779282,
+    "xgb_only": 0.12297268495904004,
+    "equal_weight": 0.12117826139832813,
+    "optimal": 0.12109156615645669
+  },
+  "improvement": {
+    "vs_equal_weight_pct": 0.07154355976973392,
+    "vs_lgb_pct": 0.5396986781256681,
+    "vs_xgb_pct": 1.5297045870063863
+  },
+  "test_results": [
+    {
+      "lgb_weight": 0.0,
+      "xgb_weight": 1.0,
+      "rmspe": 0.12297268495904004
+    },
+    {
+      "lgb_weight": 0.1,
+      "xgb_weight": 0.9,
+      "rmspe": 0.1224312773997237
+    },
+    {
+      "lgb_weight": 0.2,
+      "xgb_weight": 0.8,
+      "rmspe": 0.12198023149931075
+    },
+    {
+      "lgb_weight": 0.3,
+      "xgb_weight": 0.7,
+      "rmspe": 0.12162042423329447
+    },
+    {
+      "lgb_weight": 0.4,
+      "xgb_weight": 0.6,
+      "rmspe": 0.1213528628507684
+    },
+    {
+      "lgb_weight": 0.5,
+      "xgb_weight": 0.5,
+      "rmspe": 0.12117826139832813
+    },
+    {
+      "lgb_weight": 0.6,
+      "xgb_weight": 0.4,
+      "rmspe": 0.12109750451651874
+    },
+    {
+      "lgb_weight": 0.7,
+      "xgb_weight": 0.30000000000000004,
+      "rmspe": 0.12111152691388138
+    },
+    {
+      "lgb_weight": 0.8,
+      "xgb_weight": 0.19999999999999996,
+      "rmspe": 0.12122188163241251
+    },
+    {
+      "lgb_weight": 0.9,
+      "xgb_weight": 0.09999999999999998,
+      "rmspe": 0.1214318157902207
+    },
+    {
+      "lgb_weight": 1.0,
+      "xgb_weight": 0.0,
+      "rmspe": 0.12174864196779282
+    }
+  ]
+}
